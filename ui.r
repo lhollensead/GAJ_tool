@@ -1,24 +1,29 @@
-#ui
-#line with comment
 
-
-monthStart <- function(x) {
-  x <- as.POSIXlt(x)
-  x$mday <- 1
-  as.Date(x)
-}
-
-mindate <- "2020-08-01"
-maxdate <- "2021-7-31"
-
-ui <- fluidPage(
-  radioButtons("dataset", "Choose a zone configuration",
-               c("Two zones"="two","Three zones"="three")),
-  sliderInput(inputId = "Order",
-              label = "Choose a fishing season",  
-              min = as.Date(mindate, origin='1970-01-01'), max = as.Date(maxdate, origin='1970-01-01'), value = c(as.Date(mindate, origin='1970-01-01'),as.Date(maxdate, origin='1970-01-01')),
-              timeFormat='%m-%d-%y', dragRange = TRUE, width='700px'),
+ui <- 
+  
+  
+  dashboardPage(
+    
+    dashboardHeader(title="Greater amberjack decision tool"),
+    dashboardSidebar(disable=TRUE,
+                     
+                     sidebarMenu(disable = TRUE)),
+dashboardBody(
+  tabPanel("Dashboard",
+           fluidRow(width=3),
+           fluidPage(
+             radioButtons("dataset", "Choose a zone configuration",
+                          c("No zones: Gulf-wide season allocation"="none","Two zones: West (TX,LA,MS) & East (AL,FL)"="two","Three zones: West (TX,LA,MS), North (AL to FL Dixie/Levy County, South (south of FL Dixie/Levy County)"="three"))
+  ),
+  uiOutput("allocationoption"),
+  uiOutput("Order"),
+  uiOutput("Order2"),
+  uiOutput("Order3"),
+  uiOutput("Order4"),
+  uiOutput("Order5"),
+  uiOutput("Order6"),
+  uiOutput("Order7"),
   plotOutput("plot")
 )
-
-
+)
+)

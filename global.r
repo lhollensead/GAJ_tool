@@ -5,8 +5,13 @@ library(shinydashboard)
 library(highcharter)
 library(tidyverse)
 library(dplyr)
+library(shinyWidgets)
 
 dat<-read.csv('rec_dt_12_3.csv', header=T, stringsAsFactors = FALSE)
 dat$day<-as.Date(dat$date, format = "%m/%d/%y")
-two <- dat[1:730, ]
-three <- dat[c(1:365,731:1460), ]
+ACT<-543492.5
+none<- subset(dat, dat[[2]] =="gulf", drop=TRUE)
+two <- subset(dat, dat[[2]] %in% c("east","west"), drop=TRUE)
+three <- subset(dat, dat[[2]] %in% c("west","north","south"), drop=TRUE)
+mindate <- "2020-08-01"
+maxdate <- "2021-7-31"
