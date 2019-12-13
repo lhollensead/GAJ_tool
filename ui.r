@@ -23,7 +23,10 @@ dashboardBody(
   uiOutput("Order5"),
   uiOutput("Order6"),
   uiOutput("Order7"),
-  plotOutput("plot")
+  tableOutput('table'),
+  plotOutput("plot"),
+  tableOutput("view"),
+
 )
 )
 )

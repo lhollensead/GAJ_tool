@@ -98,7 +98,36 @@ output$allocationoption <- renderUI({
     }
     
   })
-                               
+  
+spring50<-reactive({if(input$dataset=="none" & input$allocationoption=="50-50"){
+  x<-subset(none,day>=input$Order[1]&day<=input$Order[2])
+  #x$SUM<-cumsum(x$landings)
+}
+})
+
+spsum<-reactive({
+  x1<-spring50()
+  x1$SUM<-cumsum(x1[,3])
+  x2<-tail(x1[,5],n=1)
+})
+
+
+
+
+output$view<-renderTable({
+  spsum()
+})
+
+
+
+output$plot<-renderPlot({
+  plot(x=spring50()[,4],y=cumsum(spring50()[,3]),type="l",xlab="Date",ylab="Harvest")
+  abline(h=ACT*0.5,lty=2)
+  })
+
+
+
+
 }
   #y_data <- reactive({
     #if(input$dataset=="No zones")
@@ -112,9 +141,10 @@ output$allocationoption <- renderUI({
     #x <- y_data()
     #x2 <- subset(x, day>input$Order[1]& day<input$Order[2])
   #})
+  
   #output$plot <- renderPlot({
     #y_data2() %>% group_by(y_data2()$zones) %>%
-     # mutate(Harvest = cumsum(landings)) %>%
+#mutate(Harvest = cumsum(landings)) %>%
       #ggplot(y_data2()[as.Date(y_data2()$day) == input$Order ], mapping=aes(color = zones)) +
       #geom_line(aes(x=day, y = Harvest))
     
