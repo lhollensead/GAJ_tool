@@ -203,32 +203,32 @@ server <- function(input, output, session){
   output$valuebox4<-renderValueBox({
     if(input$dataset=="none"& input$survey=="old"){
       valueBox(
-        "Fall harvest total",
-        value=format(round(fasum(),0),nsmall=0,big.mark = ","))
+       "Fall harvest total",
+        value=format(round(fasum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
     }else if(input$dataset=="none"& input$survey=="new"){
       valueBox(
         "Fall harvest total",
-        value=format(round(fes_fasum(),0),nsmall=0,big.mark = ","))
+        value=format(round(fes_fasum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
     } else
       if(input$dataset=="two"& input$survey=="old"){
         valueBox(
           "West zone harvest total",
-          value=format(round(w2sum(),0),nsmall=0,big.mark = ","))
+          value=format(round(w2sum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
       }else
         if(input$dataset=="two"& input$survey=="new"){
           valueBox(
             "West zone harvest total",
-            value=format(round(fes_w2sum(),0),nsmall=0,big.mark = ","))
+            value=format(round(fes_w2sum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
         }else
         if(input$dataset=="three"& input$survey=="old"){
           valueBox(
             "West zone harvest total",
-            value=format(round(w3sum(),0),nsmall=0,big.mark = ","))
+            value=format(round(w3sum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
         }else
           if(input$dataset=="three"& input$survey=="new"){
             valueBox(
               "West zone harvest total",
-              value=format(round(fes_w3sum(),0),nsmall=0,big.mark = ","))
+              value=format(round(fes_w3sum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
           }
     
   })
@@ -239,12 +239,12 @@ server <- function(input, output, session){
     if(input$dataset=="three"& input$survey=="old"){
       valueBox(
         "South zone harvest total",
-        value=format(round(sosum(),0),nsmall=0,big.mark = ","))
+        value=format(round(sosum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
       
     } else if(input$dataset=="three"& input$survey=="new"){
       valueBox(
         "South zone harvest total",
-        value=format(round(fes_sosum(),0),nsmall=0,big.mark = ","))
+        value=format(round(fes_sosum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
       
     }
     
@@ -254,12 +254,12 @@ server <- function(input, output, session){
     if(input$dataset=="three"& input$survey=="old"){
       valueBox(
         "Days in south zone season",
-        value=nrow(sonum()))
+        value=nrow(sonum()), icon=icon("calendar-alt"))
       
     }else if(input$dataset=="three"& input$survey=="new"){
       valueBox(
         "Days in south zone season",
-        value=nrow(fes_sonum()))
+        value=nrow(fes_sonum()), icon=icon("calendar-alt"))
       
     }
     
@@ -273,7 +273,7 @@ server <- function(input, output, session){
         y<-ACT*0.2
       else if (input$allocationoption=="25% west: 50% north: 25% south")
         y<-ACT*0.25
-      valueBox("Percent of south zone ACT", color=ifelse(sosum()/y <=1, "aqua", "red"),
+      valueBox("Percent of south zone ACT", color=ifelse(sosum()/y <=1, "aqua", "red"),icon=icon(ifelse(sosum()/y <=1, "check", "times")),
                value=percent((sosum()/y)))
       
     }else if(input$dataset=="three"& input$survey=="new"){
@@ -283,7 +283,7 @@ server <- function(input, output, session){
         y<-ACT*0.2
       else if (input$allocationoption=="25% west: 50% north: 25% south")
         y<-ACT*0.25
-      valueBox("Percent of south zone ACT", color=ifelse(fes_sosum()/y <=1, "aqua", "red"),
+      valueBox("Percent of south zone ACT", color=ifelse(fes_sosum()/y <=1, "aqua", "red"),icon=icon(ifelse(fes_sosum()/y <=1, "check", "times")),
                value=percent((fes_sosum()/y)))
       
     }
@@ -295,31 +295,31 @@ server <- function(input, output, session){
     if(input$dataset=="none"& input$survey=="old"){
       valueBox(
         "Days in fall season",
-        value=nrow(fanum()))
+        value=nrow(fanum()), icon=icon("calendar-alt"))
     } else if(input$dataset=="none"& input$survey=="new"){
       valueBox(
         "Days in fall season",
-        value=nrow(fes_fanum()))
+        value=nrow(fes_fanum()), icon=icon("calendar-alt"))
     } else
       if(input$dataset=="two"& input$survey=="old"){
         valueBox(
           "Days in west zone season",
-          value=nrow(w2num()))
+          value=nrow(w2num()), icon=icon("calendar-alt"))
       } else
         if(input$dataset=="two"& input$survey=="new"){
           valueBox(
             "Days in west zone season",
-            value=nrow(fes_w2num()))
+            value=nrow(fes_w2num()), icon=icon("calendar-alt"))
         }else
         if(input$dataset=="three"& input$survey=="old"){
           valueBox(
             "Days in west zone season",
-            value=nrow(w3num()))
+            value=nrow(w3num()), icon=icon("calendar-alt"))
         }else
           if(input$dataset=="three"& input$survey=="new"){
             valueBox(
               "Days in west zone season",
-              value=nrow(fes_w3num()))
+              value=nrow(fes_w3num()), icon=icon("calendar-alt"))
           }
   })
   
@@ -331,7 +331,7 @@ server <- function(input, output, session){
         y<-ACT*0.6
       else if (input$allocationoption=="70% fall: 30% spring")
         y<-ACT*0.7
-      valueBox("Percent of fall ACT", color=ifelse(fasum()/y <=1, "aqua", "red"),
+      valueBox("Percent of fall ACT", color=ifelse(fasum()/y <=1, "aqua", "red"),icon=icon(ifelse(fasum()/y <=1, "check", "times")),
                value=percent((fasum()/y)))
     }
     else if(input$dataset=="none"& input$survey=="new"){
@@ -341,7 +341,7 @@ server <- function(input, output, session){
         y<-ACT*0.6
       else if (input$allocationoption=="70% fall: 30% spring")
         y<-ACT*0.7
-      valueBox("Percent of fall ACT", color=ifelse(fes_fasum()/y <=1, "aqua", "red"),
+      valueBox("Percent of fall ACT", color=ifelse(fes_fasum()/y <=1, "aqua", "red"),icon=icon(ifelse(fes_fasum()/y <=1, "check", "times")),
                value=percent((fes_fasum()/y)))
     }else
       if(input$dataset=="two"& input$survey=="old"){
@@ -351,7 +351,7 @@ server <- function(input, output, session){
           y<-ACT*0.4
         else if (input$allocationoption=="30% west: 70% east")
           y<-ACT*0.3
-        valueBox("Percent of west ACT", color=ifelse(w2sum()/y <=1, "aqua", "red"),
+        valueBox("Percent of west ACT", color=ifelse(w2sum()/y <=1, "aqua", "red"),icon=icon(ifelse(w2sum()/y <=1, "check", "times")),
                  value=percent((w2sum()/y)))
       } else
         if(input$dataset=="two"& input$survey=="new"){
@@ -361,7 +361,7 @@ server <- function(input, output, session){
             y<-ACT*0.4
           else if (input$allocationoption=="30% west: 70% east")
             y<-ACT*0.3
-          valueBox("Percent of west ACT", color=ifelse(fes_w2sum()/y <=1, "aqua", "red"),
+          valueBox("Percent of west ACT", color=ifelse(fes_w2sum()/y <=1, "aqua", "red"),icon=icon(ifelse(fes_w2sum()/y <=1, "check", "times")),
                    value=percent((fes_w2sum()/y)))
         }else
         if(input$dataset=="three"& input$survey=="old"){
@@ -371,7 +371,7 @@ server <- function(input, output, session){
             y<-ACT*0.2
           else if (input$allocationoption=="25% west: 50% north: 25% south")
             y<-ACT*0.25
-          valueBox("Percent of west zone ACT", color=ifelse(w3sum()/y <=1, "aqua", "red"),
+          valueBox("Percent of west zone ACT", color=ifelse(w3sum()/y <=1, "aqua", "red"),icon=icon(ifelse(w3sum()/y <=1, "check", "times")),
                    value=percent((w3sum()/y)))
         }else
           if(input$dataset=="three"& input$survey=="new"){
@@ -381,7 +381,7 @@ server <- function(input, output, session){
               y<-ACT*0.2
             else if (input$allocationoption=="25% west: 50% north: 25% south")
               y<-ACT*0.25
-            valueBox("Percent of west zone ACT", color=ifelse(fes_w3sum()/y <=1, "aqua", "red"),
+            valueBox("Percent of west zone ACT", color=ifelse(fes_w3sum()/y <=1, "aqua", "red"),icon=icon(ifelse(fes_w3sum()/y <=1, "check", "times")),
                      value=percent((fes_w3sum()/y)))
           }
   })
@@ -520,31 +520,31 @@ server <- function(input, output, session){
     if(input$dataset=="none"& input$survey=="old"){
       valueBox(
         "Spring harvest total",
-        value=format(round(spsum(),0),nsmall=0,big.mark = ","))}
+        value=format(round(spsum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))}
     else if(input$dataset=="none"& input$survey=="new"){
       valueBox(
         "Spring harvest total",
-        value=format(round(fes_spsum(),0),nsmall=0,big.mark = ","))}else
+        value=format(round(fes_spsum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))}else
           if(input$dataset=="two"& input$survey=="old"){
             valueBox(
               "East zone harvest total",
-              value=format(round(esum(),0),nsmall=0,big.mark = ","))
+              value=format(round(esum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
           }else
             if(input$dataset=="two"& input$survey=="new"){
               valueBox(
                 "East zone harvest total",
-                value=format(round(fes_esum(),0),nsmall=0,big.mark = ","))
+                value=format(round(fes_esum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
             }
     else
             if(input$dataset=="three"& input$survey=="old"){
               valueBox(
                 "North zone harvest total",
-                value=format(round(nsum(),0),nsmall=0,big.mark = ","))
+                value=format(round(nsum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
             } else
               if(input$dataset=="three"& input$survey=="new"){
                 valueBox(
                   "North zone harvest total",
-                  value=format(round(fes_nsum(),0),nsmall=0,big.mark = ","))
+                  value=format(round(fes_nsum(),0),nsmall=0,big.mark = ","), icon=icon("fish"))
               }
   })
   
@@ -552,29 +552,29 @@ server <- function(input, output, session){
     if(input$dataset=="none"& input$survey=="old"){
       valueBox(
         "Days in spring season",
-        value=nrow(spnum()))} else if(input$dataset=="none"& input$survey=="new"){
+        value=nrow(spnum()), icon=icon("calendar-alt"))} else if(input$dataset=="none"& input$survey=="new"){
           valueBox(
             "Days in spring season",
-            value=nrow(fes_spnum()))} else
+            value=nrow(fes_spnum()), icon=icon("calendar-alt"))} else
           if(input$dataset=="two"& input$survey=="old"){
             valueBox(
               "Days in east zone season",
-              value=nrow(enum()))
+              value=nrow(enum()), icon=icon("calendar-alt"))
           } else
             if(input$dataset=="two"& input$survey=="new"){
               valueBox(
                 "Days in east zone season",
-                value=nrow(fes_enum()))
+                value=nrow(fes_enum()), icon=icon("calendar-alt"))
             }else
             if(input$dataset=="three"& input$survey=="old"){
               valueBox(
                 "Days in north zone season",
-                value=nrow(nnum()))
+                value=nrow(nnum()), icon=icon("calendar-alt"))
             }else
               if(input$dataset=="three"& input$survey=="new"){
                 valueBox(
                   "Days in north zone season",
-                  value=nrow(fes_nnum()))
+                  value=nrow(fes_nnum()), icon=icon("calendar-alt"))
               }
   })
   
@@ -587,7 +587,7 @@ server <- function(input, output, session){
         y<-ACT*0.4
       else if (input$allocationoption=="70% fall: 30% spring")
         y<-ACT*0.3
-      valueBox("Percent of spring ACT", color= ifelse(spsum()/y <=1, "aqua", "red"),
+      valueBox("Percent of spring ACT", color= ifelse(spsum()/y <=1, "aqua", "red"),icon=icon(ifelse(spsum()/y <=1, "check", "times")),
                value=percent((spsum()/y)))
     }else if(input$dataset=="none"& input$survey=="new"){
       if(input$allocationoption=="50% fall: 50% spring")
@@ -596,7 +596,7 @@ server <- function(input, output, session){
         y<-ACT*0.4
       else if (input$allocationoption=="70% fall: 30% spring")
         y<-ACT*0.3
-      valueBox("Percent of spring ACT", color= ifelse(fes_spsum()/y <=1, "aqua", "red"),
+      valueBox("Percent of spring ACT", color= ifelse(fes_spsum()/y <=1, "aqua", "red"),icon=icon(ifelse(fes_spsum()/y <=1, "check", "times")),
                value=percent((fes_spsum()/y)))
     } else
       
@@ -607,7 +607,7 @@ server <- function(input, output, session){
           y<-ACT*0.6
         else if (input$allocationoption=="30% west: 70% east")
           y<-ACT*0.7
-        valueBox("Percent of east ACT", color=ifelse(esum()/y <=1, "aqua", "red"),
+        valueBox("Percent of east ACT", color=ifelse(esum()/y <=1, "aqua", "red"),icon=icon(ifelse(esum()/y <=1, "check", "times")),
                  value=percent((esum()/y)))
       }else
         
@@ -618,7 +618,7 @@ server <- function(input, output, session){
             y<-ACT*0.6
           else if (input$allocationoption=="30% west: 70% east")
             y<-ACT*0.7
-          valueBox("Percent of east ACT", color=ifelse(fes_esum()/y <=1, "aqua", "red"),
+          valueBox("Percent of east ACT", color=ifelse(fes_esum()/y <=1, "aqua", "red"),icon=icon(ifelse(fes_esum()/y <=1, "check", "times")),
                    value=percent((fes_esum()/y)))
         } else
         if(input$dataset=="three"& input$survey=="old"){
@@ -628,7 +628,7 @@ server <- function(input, output, session){
             y<-ACT*0.6
           else if (input$allocationoption=="25% west: 50% north: 25% south")
             y<-ACT*0.5
-          valueBox("Percent of north zone ACT", color=ifelse(nsum()/y <=1, "aqua", "red"),
+          valueBox("Percent of north zone ACT", color=ifelse(nsum()/y <=1, "aqua", "red"),icon=icon(ifelse(nsum()/y <=1, "check", "times")),
                    value=percent((nsum()/y)))
         }else
           if(input$dataset=="three"& input$survey=="new"){
@@ -638,7 +638,7 @@ server <- function(input, output, session){
               y<-ACT*0.6
             else if (input$allocationoption=="25% west: 50% north: 25% south")
               y<-ACT*0.5
-            valueBox("Percent of north zone ACT", color=ifelse(fes_nsum()/y <=1, "aqua", "red"),
+            valueBox("Percent of north zone ACT", color=ifelse(fes_nsum()/y <=1, "aqua", "red"),icon=icon(ifelse(fes_nsum()/y <=1, "check", "times")),
                      value=percent((fes_nsum()/y)))
           }
   })

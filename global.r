@@ -15,13 +15,7 @@ fes_dat<-read.csv('fes_rec_dt_12_30.csv', header=T, stringsAsFactors = FALSE)
 dat$day<-as.Date(dat$date, format = "%m/%d/%Y")
 fes_dat$day<-as.Date(fes_dat$date, format = "%m/%d/%Y")
 
-gulf_dcr<-read.csv('gulf_dcr.csv', header=T, stringsAsFactors = FALSE)
-two_dcr<-read.csv('two_dcr.csv', header=T, stringsAsFactors = FALSE)
-three_dcr<-read.csv('three_dcr.csv', header=T, stringsAsFactors = FALSE)
 
-fes_gulf_dcr<-read.csv('fes_gulf_dcr.csv', header=T, stringsAsFactors = FALSE)
-fes_two_dcr<-read.csv('fes_two_dcr.csv', header=T, stringsAsFactors = FALSE)
-fes_three_dcr<-read.csv('fes_three_dcr.csv', header=T, stringsAsFactors = FALSE)
 
 ACT<-543492.5
 
