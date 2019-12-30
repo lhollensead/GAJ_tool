@@ -1,6 +1,6 @@
 ui <- dashboardPage(
   
-  dashboardHeader(title="Greater amberjack recreational fishery decision tool",titleWidth = 480),
+  dashboardHeader(title="Greater amberjack recreational fishery decision tool",titleWidth = 490),
   dashboardSidebar(disable=TRUE,
                    
                    sidebarMenu(disable = TRUE)),
