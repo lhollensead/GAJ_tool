@@ -1,28 +1,6 @@
 #server
 server <- function(input, output, session){
   
-  rec.dat<-reactive({
-    
-    if(input$dataset == "none" & input$survey=="old"){
-     d<-none
-    }
-    else if(input$dataset == "none"& input$survey=="new"){
-      d<-fes_none
-    }
-    else if(input$dataset == "two"& input$survey=="old"){
-      d<-two
-    }
-    else if(input$dataset == "two"& input$survey=="new"){
-      d<-fes_two
-    }
-    else if(input$dataset == "three"& input$survey=="old"){
-      d<-three
-    }
-    else if(input$dataset == "three"& input$survey=="new"){
-      d<-fes_three
-    }
-  })
-  
   output$maps<-renderUI({
     inputId="maps"
     if(input$dataset == "none" & input$survey=="old"|input$dataset == "none"& input$survey=="new"){
