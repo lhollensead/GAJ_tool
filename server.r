@@ -695,18 +695,24 @@ server <- function(input, output, session){
         y<-c(ACT*0.7,ACT*0.3)
       
       
-      p <- ggplot(demo1(), aes(x = group, y = value, fill=value)) +
-        geom_bar(stat='identity', width = 0.5) +
-        
+      p <-
+        ggplot(data=demo1(), mapping=aes(x = group, y = value)) +
+        geom_bar(stat='identity', width = 0.5,aes(fill=group)) +
+
         theme_bluewhite() +
-        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "Fall ACT"),  color="red") +
-        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "Spring ACT"), color="green") +
-        geom_segment(aes(x=2.5,y=ACT, xend=3.5, yend=ACT, linetype = "Stock ACT"), color="black") +
-        # guides(fill=guide_legend(title="New Legend Title")) 
+        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "Fall ACT"),  color="darkgray",lwd=2) +
+        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "Spring ACT"), color="blue",lwd=2) +
+        geom_segment(aes(x=2.5,y=ACT, xend=3.5, yend=ACT, linetype = "Total ACT"), color="black",lwd=2) +
+        # guides(fill=guide_legend(title="New Legend Title"))
         theme(legend.title=element_blank()) +
         ylab("Landings (lbs ww)") +
         xlab(" ") +
-        scale_fill_continuous(guide=FALSE)
+        scale_fill_continuous(guide=FALSE)+
+        scale_fill_manual(labels=c("Fall ACT","Spring ACT","Total ACT"),values = c("darkgray","blue","black"),guide=F)+
+        scale_linetype_manual(" ",labels=c("Fall ACT","Spring ACT","Total ACT"),values=c("Fall ACT"=3,"Spring ACT"=6,"Total ACT"=1))+
+        scale_y_continuous(labels = comma)+
+        guides(shape = guide_legend(override.aes = list(size = 5)))
+    
       
       # p<-barplot(none_sum(),col=c("blue","gray"), ylim=c(0,ACT*0.7))
       #    abline(h=y,col=c("blue","gray"),lwd=4)}
