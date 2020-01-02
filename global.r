@@ -10,6 +10,8 @@ library(scales)
 library(plotly)
 library(ggthemes)
 library(scales)
+library(htmltools)
+library(rintrojs)
 
 dat<-read.csv('rec_dt_12_30.csv', header=T, stringsAsFactors = FALSE)
 fes_dat<-read.csv('fes_rec_dt_12_30.csv', header=T, stringsAsFactors = FALSE)
@@ -34,15 +36,12 @@ fes_none<- subset(fes_dat, fes_dat[[2]] =="gulf", drop=TRUE)
 fes_two <- subset(fes_dat, fes_dat[[2]] %in% c("east","west"), drop=TRUE)
 fes_three <- subset(fes_dat, fes_dat[[2]] %in% c("west","north","south"), drop=TRUE)
 
-mycss <- "
-.irs-bar,
-.irs-bar-edge,
-.irs-single,
-.irs-grid-pol,
-.irs-max,
-.irs-min,{
-background: black;
-border-color: black;
+"
+.center {
+  display: block;
+margin-left: auto;
+margin-right: auto;
+width: 90%;
 }
 "
 

@@ -664,6 +664,10 @@ server <- function(input, output, session){
   two_sum<-reactive(c(tail(w2sum(),n=1),tail(esum(),n=1)))
   three_sum<-reactive(c(tail(w3sum(),n=1),tail(nsum(),n=1),tail(sosum(),n=1)))
   
+  fes_none_sum<-reactive(c(tail(fes_fasum(),n=1),tail(fes_spsum(),n=1)))
+  fes_two_sum<-reactive(c(tail(fes_w2sum(),n=1),tail(fes_esum(),n=1)))
+  fes_three_sum<-reactive(c(tail(fes_w3sum(),n=1),tail(fes_nsum(),n=1),tail(fes_sosum(),n=1)))
+  
   ########### table to see none_sum
   demo1 <- reactive({
     x <-none_sum()
@@ -680,6 +684,80 @@ server <- function(input, output, session){
     # x
   })
   
+  demo2 <- reactive({
+    x <-two_sum()
+    x <- data.frame(value=x)
+    y <- x 
+    x$group <- c("West", "East")
+    y$group <- "Total"
+    z <- rbind(x,y)
+    #colnames(x)
+    # total <- sum(x[,1])
+    # out <- c(x[,1],total)
+    # out <- data.frame(x=out)
+    # x<- rbind(x[,1], total)
+    # x
+  })
+  
+  demo3 <- reactive({
+    x <-three_sum()
+    x <- data.frame(value=x)
+    y <- x 
+    x$group <- c("West", "North","South")
+    y$group <- "Total"
+    z <- rbind(x,y)
+    #colnames(x)
+    # total <- sum(x[,1])
+    # out <- c(x[,1],total)
+    # out <- data.frame(x=out)
+    # x<- rbind(x[,1], total)
+    # x
+  })
+  
+  fes_demo1 <- reactive({
+    x <-fes_none_sum()
+    x <- data.frame(value=x)
+    y <- x 
+    x$group <- c("Fall", "Spring")
+    y$group <- "Total"
+    z <- rbind(x,y)
+    #colnames(x)
+    # total <- sum(x[,1])
+    # out <- c(x[,1],total)
+    # out <- data.frame(x=out)
+    # x<- rbind(x[,1], total)
+    # x
+  })
+  
+  fes_demo2 <- reactive({
+    x <-fes_two_sum()
+    x <- data.frame(value=x)
+    y <- x 
+    x$group <- c("West", "East")
+    y$group <- "Total"
+    z <- rbind(x,y)
+    #colnames(x)
+    # total <- sum(x[,1])
+    # out <- c(x[,1],total)
+    # out <- data.frame(x=out)
+    # x<- rbind(x[,1], total)
+    # x
+  })
+  
+  fes_demo3 <- reactive({
+    x <-fes_three_sum()
+    x <- data.frame(value=x)
+    y <- x 
+    x$group <- c("West", "North","South")
+    y$group <- "Total"
+    z <- rbind(x,y)
+    #colnames(x)
+    # total <- sum(x[,1])
+    # out <- c(x[,1],total)
+    # out <- data.frame(x=out)
+    # x<- rbind(x[,1], total)
+    # x
+  })
   
   #################Added by JF for consideration
   output$demo <- renderTable({demo1()})
@@ -700,15 +778,15 @@ server <- function(input, output, session){
         geom_bar(stat='identity', width = 0.5,aes(fill=group)) +
 
         theme_bluewhite() +
-        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "Fall ACT"),  color="darkgray",lwd=2) +
-        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "Spring ACT"), color="blue",lwd=2) +
+        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "Fall ACT"),  color="black",lwd=2) +
+        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "Spring ACT"), color="black",lwd=2) +
         geom_segment(aes(x=2.5,y=ACT, xend=3.5, yend=ACT, linetype = "Total ACT"), color="black",lwd=2) +
         # guides(fill=guide_legend(title="New Legend Title"))
         theme(legend.title=element_blank()) +
         ylab("Landings (lbs ww)") +
         xlab(" ") +
         scale_fill_continuous(guide=FALSE)+
-        scale_fill_manual(labels=c("Fall ACT","Spring ACT","Total ACT"),values = c("darkgray","blue","black"),guide=F)+
+        scale_fill_manual(labels=c("Fall ACT","Spring ACT","Total ACT"),values = c("darkgray","blue","darkorange2"),guide=F)+
         scale_linetype_manual(" ",labels=c("Fall ACT","Spring ACT","Total ACT"),values=c("Fall ACT"=3,"Spring ACT"=6,"Total ACT"=1))+
         scale_y_continuous(labels = comma)+
         guides(shape = guide_legend(override.aes = list(size = 5)))
@@ -729,8 +807,25 @@ server <- function(input, output, session){
         y<-c(ACT*0.4,ACT*0.6)
       else if (input$allocationoption=="30% west: 70% east")
         y<-c(ACT*0.3,ACT*0.7)
-      p<-barplot(two_sum(), col=c("blue","gray"),ylim=c(0,ACT*0.7))
-      abline(h=y,col=c("blue","gray"),lwd=4)}
+      p <-
+        ggplot(data=demo2(), mapping=aes(x = group, y = value)) +
+        geom_bar(stat='identity', width = 0.5,aes(fill=group)) +
+        
+        theme_bluewhite() +
+        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "West ACT"),  color="black",lwd=2) +
+        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "East ACT"), color="black",lwd=2) +
+        geom_segment(aes(x=2.5,y=ACT, xend=3.5, yend=ACT, linetype = "Total ACT"), color="black",lwd=2) +
+        # guides(fill=guide_legend(title="New Legend Title"))
+        theme(legend.title=element_blank()) +
+        ylab("Landings (lbs ww)") +
+        xlab(" ") +
+        scale_fill_continuous(guide=FALSE)+
+        scale_fill_manual(labels=c("West ACT","East ACT","Total ACT"),values = c("blue","darkorange2","darkgray"),guide=F)+
+        scale_linetype_manual(" ",values=c("West ACT"=3,"East ACT"=6,"Total ACT"=1),limits=c("West ACT","East ACT","Total ACT"))+
+        scale_y_continuous(labels = comma)+
+        scale_x_discrete(name=" ",limits=c("West","East","Total"))+
+        guides(shape = guide_legend(override.aes = list(size = 5)))
+      }
     if (input$dataset=="three"& input$survey=="old"){
       if(input$allocationoption=="33% west: 33% north: 33% south")
         y<-c(ACT*0.33,ACT*0.33,ACT*0.33) 
@@ -738,10 +833,122 @@ server <- function(input, output, session){
         y<-c(ACT*0.20,ACT*0.60,ACT*0.20)
       else if (input$allocationoption=="25% west: 50% north: 25% south")
         y<-c(ACT*0.25,ACT*0.5,ACT*0.25)
-      p<-barplot(three_sum(),col=c("blue","gray","yellow"), ylim=c(0,ACT*0.6))
-      abline(h=y,col=c("blue","gray","yellow"),lwd=4)}
+      p <-
+        ggplot(data=demo3(), mapping=aes(x = group, y = value)) +
+        geom_bar(stat='identity', width = 0.5,aes(fill=group)) +
+        
+        theme_bluewhite() +
+        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "West ACT"),  color="black",lwd=2) +
+        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "North ACT"), color="black",lwd=2) +
+        geom_segment(aes(x=2.5,y=y[3], xend=3.5, yend=y[3], linetype = "South ACT"), color="black",lwd=2) +
+        geom_segment(aes(x=3.5,y=ACT, xend=4.5, yend=ACT, linetype = "Total ACT"), color="black",lwd=2) +
+        # guides(fill=guide_legend(title="New Legend Title"))
+        theme(legend.title=element_blank()) +
+        ylab("Landings (lbs ww)") +
+        xlab(" ") +
+        scale_fill_continuous(guide=FALSE)+
+        scale_fill_manual(labels=c("West ACT","North ACT","South ACT","Total ACT"),values = c("blue","yellow","darkorange2","darkgray"),guide=F)+
+        scale_linetype_manual(" ",values=c("West ACT"=3,"North ACT"=6,"South ACT"=2,"Total ACT"=1),limits=c("West ACT","North ACT","South ACT","Total ACT"))+
+        scale_y_continuous(labels = comma)+
+        scale_x_discrete(name=" ",limits=c("West","North","South","Total"))+
+        guides(shape = guide_legend(override.aes = list(size = 7)),linetype=guide_legend(nrow=2))
+      }
+    if(input$dataset=="none"& input$survey=="new"){
+      if(input$allocationoption=="50% fall: 50% spring")
+        y<-c(ACT*0.5,ACT*0.5) 
+      if (input$allocationoption=="60% fall: 40% spring")
+        y<-c(ACT*0.6,ACT*0.4)
+      else if (input$allocationoption=="70% fall: 30% spring")
+        y<-c(ACT*0.7,ACT*0.3)
+      
+      
+      p <-
+        ggplot(data=fes_demo1(), mapping=aes(x = group, y = value)) +
+        geom_bar(stat='identity', width = 0.5,aes(fill=group)) +
+        
+        theme_bluewhite() +
+        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "Fall ACT"),  color="black",lwd=2) +
+        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "Spring ACT"), color="black",lwd=2) +
+        geom_segment(aes(x=2.5,y=ACT, xend=3.5, yend=ACT, linetype = "Total ACT"), color="black",lwd=2) +
+        # guides(fill=guide_legend(title="New Legend Title"))
+        theme(legend.title=element_blank()) +
+        ylab("Landings (lbs ww)") +
+        xlab(" ") +
+        scale_fill_continuous(guide=FALSE)+
+        scale_fill_manual(labels=c("Fall ACT","Spring ACT","Total ACT"),values = c("darkgray","blue","darkorange2"),guide=F)+
+        scale_linetype_manual(" ",labels=c("Fall ACT","Spring ACT","Total ACT"),values=c("Fall ACT"=3,"Spring ACT"=6,"Total ACT"=1))+
+        scale_y_continuous(labels = comma)+
+        guides(shape = guide_legend(override.aes = list(size = 5)))
+      
+      
+      # p<-barplot(none_sum(),col=c("blue","gray"), ylim=c(0,ACT*0.7))
+      #    abline(h=y,col=c("blue","gray"),lwd=4)}
+      
+      # 
+    }
+    
+    #################End: Added by JF for consideration  
+    
+    if(input$dataset=="two"& input$survey=="new"){
+      if(input$allocationoption=="50% west: 50% east")
+        y<-c(ACT*0.5,ACT*0.5) 
+      if (input$allocationoption=="40% west: 60% east")
+        y<-c(ACT*0.4,ACT*0.6)
+      else if (input$allocationoption=="30% west: 70% east")
+        y<-c(ACT*0.3,ACT*0.7)
+      p <-
+        ggplot(data=fes_demo2(), mapping=aes(x = group, y = value)) +
+        geom_bar(stat='identity', width = 0.5,aes(fill=group)) +
+        
+        theme_bluewhite() +
+        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "West ACT"),  color="black",lwd=2) +
+        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "East ACT"), color="black",lwd=2) +
+        geom_segment(aes(x=2.5,y=ACT, xend=3.5, yend=ACT, linetype = "Total ACT"), color="black",lwd=2) +
+        # guides(fill=guide_legend(title="New Legend Title"))
+        theme(legend.title=element_blank()) +
+        ylab("Landings (lbs ww)") +
+        xlab(" ") +
+        scale_fill_continuous(guide=FALSE)+
+        scale_fill_manual(labels=c("West ACT","East ACT","Total ACT"),values = c("blue","darkorange2","darkgray"),guide=F)+
+        scale_linetype_manual(" ",values=c("West ACT"=3,"East ACT"=6,"Total ACT"=1),limits=c("West ACT","East ACT","Total ACT"))+
+        scale_y_continuous(labels = comma)+
+        scale_x_discrete(name=" ",limits=c("West","East","Total"))+
+        guides(shape = guide_legend(override.aes = list(size = 5)))
+      }
+    if (input$dataset=="three"& input$survey=="new"){
+      if(input$allocationoption=="33% west: 33% north: 33% south")
+        y<-c(ACT*0.33,ACT*0.33,ACT*0.33) 
+      if (input$allocationoption=="20% west: 60% north: 20% south")
+        y<-c(ACT*0.20,ACT*0.60,ACT*0.20)
+      else if (input$allocationoption=="25% west: 50% north: 25% south")
+        y<-c(ACT*0.25,ACT*0.5,ACT*0.25)
+      p <-
+        ggplot(data=fes_demo3(), mapping=aes(x = group, y = value)) +
+        geom_bar(stat='identity', width = 0.5,aes(fill=group)) +
+        
+        theme_bluewhite() +
+        geom_segment(aes(x=0.5,y=y[1], xend=1.5, yend=y[1], linetype = "West ACT"),  color="black",lwd=2) +
+        geom_segment(aes(x=1.5,y=y[2], xend=2.5, yend=y[2], linetype = "North ACT"), color="black",lwd=2) +
+        geom_segment(aes(x=2.5,y=y[3], xend=3.5, yend=y[3], linetype = "South ACT"), color="black",lwd=2) +
+        geom_segment(aes(x=3.5,y=ACT, xend=4.5, yend=ACT, linetype = "Total ACT"), color="black",lwd=2) +
+        # guides(fill=guide_legend(title="New Legend Title"))
+        theme(legend.title=element_blank()) +
+        ylab("Landings (lbs ww)") +
+        xlab(" ") +
+        scale_fill_continuous(guide=FALSE)+
+        scale_fill_manual(labels=c("West ACT","North ACT","South ACT","Total ACT"),values = c("blue","yellow","darkorange2","darkgray"),guide=F)+
+        scale_linetype_manual(" ",values=c("West ACT"=3,"North ACT"=6,"South ACT"=2,"Total ACT"=1),limits=c("West ACT","North ACT","South ACT","Total ACT"))+
+        scale_y_continuous(labels = comma)+
+        scale_x_discrete(name=" ",limits=c("West","North","South","Total"))+
+        guides(shape = guide_legend(override.aes = list(size = 7)),linetype=guide_legend(nrow=2))
+      }
+    
     p
+    
   })
-  
+  observeEvent(input$btn,{
+    introjs(session)
+    
+  })
 }
 
