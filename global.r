@@ -26,7 +26,7 @@ fes_two_dcr<-read.csv('fes_two_dcr.csv', header=T, stringsAsFactors = FALSE)
 fes_three_dcr<-read.csv('fes_three_dcr.csv', header=T, stringsAsFactors = FALSE)
 
 
-ACT<-543492.5
+ACT<-1086985
 
 none<- subset(dat, dat[[2]] =="gulf", drop=TRUE)
 two <- subset(dat, dat[[2]] %in% c("east","west"), drop=TRUE)
@@ -62,6 +62,8 @@ theme_bluewhite <- function (base_size = 11, base_family = "") {
       legend.text = element_text(size=14),
       legend.spacing.x = unit(1, 'cm'),
       legend.key.size = unit(1, "cm"),
-      legend.background = element_rect(fill="gray97")
+      legend.background = element_rect(fill="gray97"),
+      plot.margin = margin(.5,.5, .5, .5, "cm"),
+      plot.background=element_rect( color = "cornflowerblue", inherit.blank = FALSE, size=1)
     )
 }

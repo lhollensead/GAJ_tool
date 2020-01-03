@@ -785,7 +785,6 @@ server <- function(input, output, session){
         theme(legend.title=element_blank()) +
         ylab("Landings (lbs ww)") +
         xlab(" ") +
-        scale_fill_continuous(guide=FALSE)+
         scale_fill_manual(labels=c("Fall ACT","Spring ACT","Total ACT"),values = c("darkgray","blue","darkorange2"),guide=F)+
         scale_linetype_manual(" ",labels=c("Fall ACT","Spring ACT","Total ACT"),values=c("Fall ACT"=3,"Spring ACT"=6,"Total ACT"=1))+
         scale_y_continuous(labels = comma)+
@@ -819,7 +818,6 @@ server <- function(input, output, session){
         theme(legend.title=element_blank()) +
         ylab("Landings (lbs ww)") +
         xlab(" ") +
-        scale_fill_continuous(guide=FALSE)+
         scale_fill_manual(labels=c("West ACT","East ACT","Total ACT"),values = c("blue","darkorange2","darkgray"),guide=F)+
         scale_linetype_manual(" ",values=c("West ACT"=3,"East ACT"=6,"Total ACT"=1),limits=c("West ACT","East ACT","Total ACT"))+
         scale_y_continuous(labels = comma)+
@@ -846,7 +844,6 @@ server <- function(input, output, session){
         theme(legend.title=element_blank()) +
         ylab("Landings (lbs ww)") +
         xlab(" ") +
-        scale_fill_continuous(guide=FALSE)+
         scale_fill_manual(labels=c("West ACT","North ACT","South ACT","Total ACT"),values = c("blue","yellow","darkorange2","darkgray"),guide=F)+
         scale_linetype_manual(" ",values=c("West ACT"=3,"North ACT"=6,"South ACT"=2,"Total ACT"=1),limits=c("West ACT","North ACT","South ACT","Total ACT"))+
         scale_y_continuous(labels = comma)+
@@ -874,7 +871,6 @@ server <- function(input, output, session){
         theme(legend.title=element_blank()) +
         ylab("Landings (lbs ww)") +
         xlab(" ") +
-        scale_fill_continuous(guide=FALSE)+
         scale_fill_manual(labels=c("Fall ACT","Spring ACT","Total ACT"),values = c("darkgray","blue","darkorange2"),guide=F)+
         scale_linetype_manual(" ",labels=c("Fall ACT","Spring ACT","Total ACT"),values=c("Fall ACT"=3,"Spring ACT"=6,"Total ACT"=1))+
         scale_y_continuous(labels = comma)+
@@ -908,7 +904,6 @@ server <- function(input, output, session){
         theme(legend.title=element_blank()) +
         ylab("Landings (lbs ww)") +
         xlab(" ") +
-        scale_fill_continuous(guide=FALSE)+
         scale_fill_manual(labels=c("West ACT","East ACT","Total ACT"),values = c("blue","darkorange2","darkgray"),guide=F)+
         scale_linetype_manual(" ",values=c("West ACT"=3,"East ACT"=6,"Total ACT"=1),limits=c("West ACT","East ACT","Total ACT"))+
         scale_y_continuous(labels = comma)+
@@ -935,7 +930,6 @@ server <- function(input, output, session){
         theme(legend.title=element_blank()) +
         ylab("Landings (lbs ww)") +
         xlab(" ") +
-        scale_fill_continuous(guide=FALSE)+
         scale_fill_manual(labels=c("West ACT","North ACT","South ACT","Total ACT"),values = c("blue","yellow","darkorange2","darkgray"),guide=F)+
         scale_linetype_manual(" ",values=c("West ACT"=3,"North ACT"=6,"South ACT"=2,"Total ACT"=1),limits=c("West ACT","North ACT","South ACT","Total ACT"))+
         scale_y_continuous(labels = comma)+
