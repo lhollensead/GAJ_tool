@@ -27,8 +27,14 @@ server <- function(input, output, session){
           if(input$dataset == "two"){#& input$survey=="old"|input$dataset == "two"& input$survey=="new"){
             choices = c("50% west: 50% east","40% west: 60% east","30% west: 70% east")}else
               if(input$dataset == "three"){#& input$survey=="old"|input$dataset == "three"& input$survey=="new"){
-                choices = c("33% west: 33% north: 33% south","20% west: 60% north: 20% south","25% west: 50% north: 25% south")}
-    )
+                choices = c("33% west: 33% north: 33% south","20% west: 60% north: 20% south","25% west: 50% north: 25% south")},
+      if(input$dataset == "none"){# & input$survey=="old"|input$dataset == "none"& input$survey=="new"){
+        selected = "70% fall: 30% spring"}else
+          if(input$dataset == "two"){#& input$survey=="old"|input$dataset == "two"& input$survey=="new"){
+            selected = "40% west: 60% east"}else
+              if(input$dataset == "three"){#& input$survey=="old"|input$dataset == "three"& input$survey=="new"){
+                selected = "20% west: 60% north: 20% south"}
+      )
   })
   
   
@@ -60,7 +66,7 @@ server <- function(input, output, session){
     if(input$dataset == "two"){#& input$survey=="old"|input$dataset == "two"& input$survey=="new"){
       sliderInput(inputId = "Order3",
                   label = "West zone",  
-                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-7-31', origin='1970-01-01'), value = c(as.Date('2020-08-01', origin='1970-01-01'),as.Date('2021-7-31', origin='1970-01-01')),
+                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-7-31', origin='1970-01-01'), value = c(as.Date('2020-08-01', origin='1970-01-01'),as.Date('2020-10-31', origin='1970-01-01')),
                   timeFormat='%m-%d-%Y', dragRange = TRUE, width='700px')
       
     }
@@ -70,7 +76,7 @@ server <- function(input, output, session){
     if(input$dataset == "two"){#& input$survey=="old"|input$dataset == "two"& input$survey=="new"){
       sliderInput(inputId = "Order4",
                   label = "East zone",  
-                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-07-31', origin='1970-01-01'), value = c(as.Date('2020-08-01', origin='1970-01-01'),as.Date('2021-07-31', origin='1970-01-01')),
+                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-07-31', origin='1970-01-01'), value = c(as.Date('2021-05-01', origin='1970-01-01'),as.Date('2021-05-31', origin='1970-01-01')),
                   timeFormat='%m-%d-%Y', dragRange = TRUE, width='700px')
       
     }
@@ -80,7 +86,7 @@ server <- function(input, output, session){
     if(input$dataset == "three"){#& input$survey=="old"|input$dataset == "three"& input$survey=="new"){
       sliderInput(inputId = "Order5",
                   label = "West zone",  
-                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-07-31', origin='1970-01-01'), value = c(as.Date('2020-08-01', origin='1970-01-01'),as.Date('2021-07-31', origin='1970-01-01')),
+                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-07-31', origin='1970-01-01'), value = c(as.Date('2020-08-01', origin='1970-01-01'),as.Date('2020-10-31', origin='1970-01-01')),
                   timeFormat='%m-%d-%Y', dragRange = TRUE, width='700px')
       
     }
@@ -90,7 +96,7 @@ server <- function(input, output, session){
     if(input$dataset == "three"){#& input$survey=="old"|input$dataset == "three"& input$survey=="new"){
       sliderInput(inputId = "Order6",
                   label = "North zone",  
-                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-07-31', origin='1970-01-01'), value = c(as.Date('2020-08-01', origin='1970-01-01'),as.Date('2021-07-31', origin='1970-01-01')),
+                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-07-31', origin='1970-01-01'), value = c(as.Date('2021-05-01', origin='1970-01-01'),as.Date('2021-05-31', origin='1970-01-01')),
                   timeFormat='%m-%d-%Y', dragRange = TRUE, width='700px')
       
     }
@@ -100,7 +106,7 @@ server <- function(input, output, session){
     if(input$dataset == "three"){#& input$survey=="old"|input$dataset == "three"& input$survey=="new"){
       sliderInput(inputId = "Order7",
                   label = "South zone",  
-                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-07-31', origin='1970-01-01'), value = c(as.Date('2020-08-01', origin='1970-01-01'),as.Date('2021-07-31', origin='1970-01-01')),
+                  min = as.Date('2020-08-01', origin='1970-01-01'), max = as.Date('2021-07-31', origin='1970-01-01'), value = c(as.Date('2021-05-01', origin='1970-01-01'),as.Date('2021-05-31', origin='1970-01-01')),
                   timeFormat='%m-%d-%Y', dragRange = TRUE, width='700px')
       
     }
@@ -795,7 +801,9 @@ server <- function(input, output, session){
         scale_fill_manual(labels=c("Fall ACT","Spring ACT","Total ACT"),values = c("darkgray","blue","darkorange2"),guide=F)+
         scale_linetype_manual(" ",labels=c("Fall ACT","Spring ACT","Total ACT"),values=c("Fall ACT"=3,"Spring ACT"=6,"Total ACT"=1))+
         scale_y_continuous(labels = comma)+
-        guides(shape = guide_legend(override.aes = list(size = 5)))
+        guides(shape = guide_legend(override.aes = list(size = 5)))+
+        ggtitle("Estimated harvest by season and total harvest") +
+        theme(plot.title = element_text(hjust = 0.5,size=16,face="bold"))
     
       
       # p<-barplot(none_sum(),col=c("blue","gray"), ylim=c(0,ACT*0.7))
@@ -829,7 +837,9 @@ server <- function(input, output, session){
         scale_linetype_manual(" ",values=c("West ACT"=3,"East ACT"=6,"Total ACT"=1),limits=c("West ACT","East ACT","Total ACT"))+
         scale_y_continuous(labels = comma)+
         scale_x_discrete(name=" ",limits=c("West","East","Total"))+
-        guides(shape = guide_legend(override.aes = list(size = 5)))
+        guides(shape = guide_legend(override.aes = list(size = 5)))+
+        ggtitle("Estimated harvest by zone and total harvest") +
+        theme(plot.title = element_text(hjust = 0.5,size=16,face="bold"))
       }
     if (input$dataset=="three"){#& input$survey=="old"){
       if(input$allocationoption=="33% west: 33% north: 33% south")
@@ -855,7 +865,9 @@ server <- function(input, output, session){
         scale_linetype_manual(" ",values=c("West ACT"=3,"North ACT"=6,"South ACT"=2,"Total ACT"=1),limits=c("West ACT","North ACT","South ACT","Total ACT"))+
         scale_y_continuous(labels = comma)+
         scale_x_discrete(name=" ",limits=c("West","North","South","Total"))+
-        guides(shape = guide_legend(override.aes = list(size = 7)),linetype=guide_legend(nrow=2))
+        guides(shape = guide_legend(override.aes = list(size = 7)),linetype=guide_legend(nrow=2))+
+        ggtitle("Estimated harvest by zone and total harvest") +
+        theme(plot.title = element_text(hjust = 0.5,size=16,face="bold"))
       }
     # if(input$dataset=="none"& input$survey=="new"){
     #   if(input$allocationoption=="50% fall: 50% spring")
@@ -947,6 +959,7 @@ server <- function(input, output, session){
     p
     
   })
+
   observeEvent(input$btn,{
     introjs(session)
     

@@ -2,11 +2,11 @@
 
 library(shiny)
 library(shinydashboard)
-library(RSQLite)
+#library(RSQLite)
 #library(highcharter)
 library(tidyverse)
 library(dplyr)
-#library(shinyWidgets)
+library(shinyWidgets)
 library(scales)
 #library(plotly)
 #library(ggthemes)
