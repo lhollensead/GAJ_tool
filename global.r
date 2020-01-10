@@ -1,6 +1,7 @@
 #global
 
 library(shiny)
+library(shinyBS)
 library(shinydashboard)
 #library(RSQLite)
 #library(highcharter)

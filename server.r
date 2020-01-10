@@ -1,6 +1,6 @@
 #server
 server <- function(input, output, session){
-  
+  toggleModal(session,'modal',toggle="open")
   output$maps<-renderUI({
     inputId="maps"
     if(input$dataset == "none"){ #& input$survey=="old"|input$dataset == "none"& input$survey=="new"){

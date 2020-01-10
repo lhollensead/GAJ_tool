@@ -6,7 +6,8 @@ ui <- dashboardPage(
                    sidebarMenu(disable = TRUE)),
   dashboardBody(
     tabsetPanel(tabPanel("Dashboard",
-             fluidRow(introjsUI(),column(width=4,
+             fluidRow(introjsUI(),mainPanel(bsModal(id='modal',title='Gulf of Mexico greater amberjack recreational decision support tool',trigger='',size='large',p("<b>The Council</b> is considering alternatvies to modify recreational management of greater amberjack.  This tool is intended to support the decision making process.  This process is still in the early stages and all options presented in this tool are subject to change.  After reviewing the proposed options in the tool, please contact us through the Council website to provide comment.")),width=12),
+                      column(width=4,
                              column(width=12,introBox(actionButton("btn",HTML('<h4>How do I use this decision tool?</h4>'), width=300,
                                           style="background-color: #0066ff;border-color: #0066ff; color: #fff;margin: 6px 0px 6px 0px;" ),data.step=1,data.intro="Welcome to the Gulf of Mexico greater amberjack recreational decision tool!  This tool estimates the length of the greater amberjack recreational season based on different management strategies.  Specifically, it considers a variety of ways to manage the recreational sector with zones and split seasons.
                                           Greater amberjack is managed with a Gulf-wide, recreational Annual Catch Target of 1,086,985 pounds.  The sum of estimated daily catch rates can be used to estimate the recreational fishing season length under different management options.   Zone or season specific allocations can be created to increase access while still achieving stock rebuilding goals.")),
@@ -50,13 +51,13 @@ ui <- dashboardPage(
                                               '<div id="about-the-data" class="section level4">
                                               <h4>Caveats about the tool</h4>
                                               <ul>
-                                              <li>Fishing seasons within zones may be chosen using the tool (optional Step 3) but this consideration is not currently included in the draft framework.</li>
+                                              <li>Fishing seasons within zones may be chosen using the tool (optional Step 3) but this consideration is not currently mandated in the draft framework.</li>
                                               <li>The tool does not take into account any effort overlap between potential zones. </li>
                                               <li>Allocation options are based on equal division of the quota, or an option informed by historical landings for each area.  The Council may decided to explore other plausible allocation options informed by historical landings.</li>
                                               <li>Due to a number of recent management changes, many assumptions have to be made to estimate daily catch rates.  Check out the "About the Data" tab to learn more.</li>
                                               <li>The tool is designed to investigate several management approaches for greater amberjack but contains an uknown amount of error. It is not to be used for forecast or predictive analysis. </li>
                                               </ul>
-                                              <p>If you have any questions, contact us at <a href = "mailto: portal@gulfcouncil.org">portal@gulfcouncil.org</a><p>
+                                              <p>If you have any questions, contact us at <a href = "mailto: gulfcouncil@gulfcouncil.org">gulfcouncil@gulfcouncil.org</a><p>
                                               <p>This tool was last updated <script> document.write(new Date().toLocaleDateString()); </script> <p>
                                               </div>')
                                             ),data.step=8, data.intro="The tool has a number of caveats that should be considered when using the tool.")),
